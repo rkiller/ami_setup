@@ -8,7 +8,6 @@ echo "Installing Image/Mini Magik Support"
 #sudo /sbin/ldconfig /usr/local/lib64 # Keeping this just to be safe
 sudo /sbin/ldconfig -v
 
-sudo yum makecache
 sudo yum -y install libtool
 sudo yum -y install gcc-c++
 #sudo yum -y install cmake
@@ -62,8 +61,7 @@ if ! sudo /sbin/ldconfig -p | grep 'libheif' &> /dev/null; then
 fi
 
 echo $(sudo /sbin/ldconfig -p | grep 'libwebp')
-# Needs to be rebuilt on AWS AMI
-#if ! sudo /sbin/ldconfig -p | grep 'libwebp' &> /dev/null; then
+if ! sudo /sbin/ldconfig -p | grep 'libwebp' &> /dev/null; then
        echo "Installing webp"
        wget https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.1.0.tar.gz
        tar xvzf libwebp-1.1.0.tar.gz
@@ -73,11 +71,10 @@ echo $(sudo /sbin/ldconfig -p | grep 'libwebp')
        sudo yum -y install libwebp-devel.x86_64
        cd ..
        sudo rm -rf libwebp-1.1.0
-#fi
+fi
 
 echo $(sudo /sbin/ldconfig -p | grep 'libopenjp2')
-# Needs to be rebuilt on AWS AMI
-#if ! sudo /sbin/ldconfig -p | grep 'libopenjp2' &> /dev/null; then
+if ! sudo /sbin/ldconfig -p | grep 'libopenjp2' &> /dev/null; then
        wget https://github.com/uclouvain/openjpeg/archive/master.zip
        unzip master.zip
        rm -rf master.zip
@@ -90,7 +87,7 @@ echo $(sudo /sbin/ldconfig -p | grep 'libopenjp2')
        sudo make clean
        cd ../..
        sudo rm -rf openjpeg-master
-#fi
+fi
 
 echo $(sudo /sbin/ldconfig -p | grep 'libOpenEXR')
 if ! sudo /sbin/ldconfig -p | grep 'libOpenEXR' &> /dev/null; then
