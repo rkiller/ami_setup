@@ -2,7 +2,6 @@
 set -xe
 echo "I am: `whoami`"
 
-NODE_VERSION=env | grep NODE_VERSION
 if [ -z "$NODE_VERSION" ]; then NODE_VERSION='16'; fi
 
 EXISTING_VERSION=`node --version`
