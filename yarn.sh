@@ -14,22 +14,27 @@ if [[ ${EXISTING_VERSION%.*.*} == "v$NODE_VERSION" ]]; then
 else
   echo "Installing Node v$NODE_VERSION.x ..."
   # Download the Node setup script
-  curl --location https://rpm.nodesource.com/setup_$NODE_VERSION.x > ~/node_install.sh
-            
-  # Confirm that it downloaded
-  file ~/node_install.sh
-  
-  # Clean yum cache
-  sudo yum -y remove nodejs npm
-  sudo rm -fr /var/cache/yum/*
-  sudo yum -y clean all
-            
-  # Run the Node setup script
-  # When changing versions, make sure package in /var/cache/yum/x86_64/2018.03/nodesource/packages/ is deleted
-  sudo bash ~/node_install.sh
-            
-  # Install nodejs
-  sudo yum -y install nodejs
+  #curl --location https://rpm.nodesource.com/setup_$NODE_VERSION.x > ~/node_install.sh
+  #          
+  ## Confirm that it downloaded
+  #file ~/node_install.sh
+  #
+ # # Clean yum cache
+  #sudo yum -y remove nodejs npm
+  #sudo rm -fr /var/cache/yum/*
+  #sudo yum -y clean all
+  #          
+  ## Run the Node setup script
+  ## When changing versions, make sure package in /var/cache/yum/x86_64/2018.03/nodesource/packages/ is deleted
+  #sudo bash ~/node_install.sh
+  #          
+  ## Install nodejs
+  #sudo yum -y install nodejs
+
+  curl -sL https://rpm.nodesource.com/setup_$NODE_VERSION.x | sudo bash -
+  sudo yum install -y nodejs
+  sudo yum -y install gcc-c++ make
+
   node --version
   echo "... and finished installing Node v$NODE_VERSION"
 fi
@@ -48,14 +53,18 @@ else
   # QUESTION: Will this script be run on new instances that are created by auto-scaling?
   # QUESTION: Should installation be moved to a rake task?
 
-  # Download the yarn repo
-  sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
-        
-  # Confirm that it downloaded
-  file /etc/yum.repos.d/yarn.repo
-        
-  # install yarn
+  ## Download the yarn repo
+  #sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+  #      
+  ## Confirm that it downloaded
+  #file /etc/yum.repos.d/yarn.repo
+  #      
+  ## install yarn
+  #sudo yum -y install yarn
+
+  curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
   sudo yum -y install yarn
+
   yarn --version
 
   echo "... and finished installing yarn."
