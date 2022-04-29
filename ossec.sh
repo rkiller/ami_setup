@@ -3,8 +3,8 @@ EB_APP_USER=$(/opt/elasticbeanstalk/bin/get-config platformconfig -k AppUser)
 WORKSPACE=/home/$(EB_APP_USER)
 WORKSPACE_OSSEC=${WORKSPACE}/ossec
 
-#echo Install tools
-#sudo yum install -y zlib-devel pcre2-devel make gcc zlib-devel pcre2-devel sqlite-devel openssl-devel libevent-devel
+echo Install tools
+sudo yum install -y zlib-devel pcre2-devel make gcc zlib-devel pcre2-devel sqlite-devel openssl-devel libevent-devel
 
 echo Download OSSEC
 wget -O ${WORKSPACE}/ossec.tar.gz https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz

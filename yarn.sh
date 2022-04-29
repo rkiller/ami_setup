@@ -8,10 +8,10 @@ EXISTING_VERSION=`node --version`
 echo "Node Version $NODE_VERSION set in config..."
 
 # If node or npm is not detected, install it.
-if [[ ${EXISTING_VERSION%.*.*} == "v$NODE_VERSION" ]]; then
-  echo "Skipping installation of node -- node version $NODE_VERSION already installed."
-  echo "node --version: `node --version`"
-else
+#if [[ ${EXISTING_VERSION%.*.*} == "v$NODE_VERSION" ]]; then
+#  echo "Skipping installation of node -- node version $NODE_VERSION already installed."
+#  echo "node --version: `node --version`"
+#else
   echo "Installing Node v$NODE_VERSION.x ..."
   # Download the Node setup script
   #curl --location https://rpm.nodesource.com/setup_$NODE_VERSION.x > ~/node_install.sh
@@ -37,7 +37,7 @@ else
 
   node --version
   echo "... and finished installing Node v$NODE_VERSION"
-fi
+#fi
 
 # If yarn is not detected, install it.
 if which yarn; then
