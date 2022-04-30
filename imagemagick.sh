@@ -8,20 +8,16 @@ echo "Installing Image/Mini Magik Support"
 #sudo /sbin/ldconfig /usr/local/lib64 # Keeping this just to be safe
 sudo /sbin/ldconfig -v
 
-sudo yum makecache
-sudo yum -y install libtool
-sudo yum -y install gcc-c++
-#sudo yum -y install cmake
-sudo yum -y groupinstall "Development Tools"
+ARCHITECTURE=$(uname -m)
 
 if ! cmake --version | grep -E '3.22.0' ; then
        echo "Installing latest CMAKE"
-       curl -L https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.sh --output cmake-3.22.0-linux-x86_64.sh
+       curl -L https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-$ARCHITECTURE.sh --output cmake-3.22.0-linux-$ARCHITECTURE.sh
        sudo mkdir -p /opt/cmake
-       sudo sh cmake-3.22.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake
+       sudo sh cmake-3.22.0-linux-$ARCHITECTURE.sh --skip-license --prefix=/opt/cmake
        sudo rm -rf /usr/bin/cmake
        sudo ln -s /opt/cmake/bin/cmake /usr/bin/cmake
-       rm -rf cmake-3.22.0-linux-x86_64.sh
+       rm -rf cmake-3.22.0-linux-$ARCHITECTURE.sh
        echo $(cmake --version)
 fi
 
@@ -70,7 +66,7 @@ echo $(sudo /sbin/ldconfig -p | grep 'libwebp')
        sudo rm -f libwebp-1.1.0.tar.gz
        cd libwebp-1.1.0/
        sudo ./configure && sudo make && sudo make install
-       sudo yum -y install libwebp-devel.x86_64
+       sudo yum -y install libwebp-devel.$ARCHITECTURE
        cd ..
        sudo rm -rf libwebp-1.1.0
 #fi

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+ARCHITECTURE=$(uname -m)
 sudo cp snowflake.repo /etc/yum.repos.d/.
-sudo yum -y install unixODBC.x86_64
-sudo yum -y install unixODBC-devel.x86_64
+sudo yum -y install unixODBC.$ARCHITECTURE
+sudo yum -y install unixODBC-devel.$ARCHITECTURE
 sudo yum -y install snowflake-odbc
 sudo bash -c 'echo "[ODBC Data Sources]" > /etc/odbc.ini'
 sudo bash -c 'echo "SnowflakeDSIIDriver" >> /etc/odbc.ini'
