@@ -4,8 +4,8 @@ echo "Installing Image/Mini Magik Support"
 
 # Adding /usr/local/lib to ldconfig
 # 11.26.21 This is commented out. Adding a custom file to /etc/ld.so.conf.d above
-#sudo /sbin/ldconfig /usr/local/lib
-#sudo /sbin/ldconfig /usr/local/lib64 # Keeping this just to be safe
+sudo /sbin/ldconfig /usr/local/lib
+sudo /sbin/ldconfig /usr/local/lib64 # Keeping this just to be safe
 sudo /sbin/ldconfig -v
 
 ARCHITECTURE=$(uname -m)
@@ -73,7 +73,7 @@ echo $(sudo /sbin/ldconfig -p | grep 'libwebp')
 
 echo $(sudo /sbin/ldconfig -p | grep 'libopenjp2')
 # Needs to be rebuilt on AWS AMI
-#if ! sudo /sbin/ldconfig -p | grep 'libopenjp2' &> /dev/null; then
+if ! sudo /sbin/ldconfig -p | grep 'libopenjp2' &> /dev/null; then
        wget https://github.com/uclouvain/openjpeg/archive/master.zip
        unzip master.zip
        rm -rf master.zip
@@ -86,7 +86,7 @@ echo $(sudo /sbin/ldconfig -p | grep 'libopenjp2')
        sudo make clean
        cd ../..
        sudo rm -rf openjpeg-master
-#fi
+fi
 
 echo $(sudo /sbin/ldconfig -p | grep 'libOpenEXR')
 if ! sudo /sbin/ldconfig -p | grep 'libOpenEXR' &> /dev/null; then
