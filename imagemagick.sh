@@ -10,6 +10,7 @@ sudo /sbin/ldconfig -v
 
 ARCHITECTURE=$(uname -m)
 
+echo $(cmake --version)
 if ! cmake --version | grep -E '3.22.0' ; then
        echo "Installing latest CMAKE"
        curl -L https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-$ARCHITECTURE.sh --output cmake-3.22.0-linux-$ARCHITECTURE.sh
