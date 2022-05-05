@@ -13,3 +13,4 @@ sudo yum -y install libtool
 sudo yum -y install gcc-c++
 sudo yum -y groupinstall "Development Tools"
 sudo yum -y install jbigkit.$ARCHITECTURE jbigkit-devel.$ARCHITECTURE
+sudo yum -y install openjpeg2 openjpeg2-devel
