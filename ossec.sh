@@ -3,6 +3,9 @@ if ! sudo test /var/ossec/bin/ossec-control; then
 	EB_APP_USER=$(sudo /opt/elasticbeanstalk/bin/get-config platformconfig -k AppUser)
 	WORKSPACE=/home/$EB_APP_USER
 	WORKSPACE_OSSEC=${WORKSPACE}/ossec
+
+	echo "Download tools for OSSEC"
+	sudo yum install -y zlib-devel pcre2-devel make gcc zlib-devel pcre2-devel sqlite-devel openssl-devel libevent-devel systemd-devel
 	
 	echo Download OSSEC
 	sudo wget -O ${WORKSPACE}/ossec.tar.gz https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz

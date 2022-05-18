@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-./tools.sh
+./updates.sh
 ./imagemagick.sh
 ./ossec.sh
 ./pdftk.sh

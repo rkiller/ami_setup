@@ -8,6 +8,14 @@ if ! magick --version | grep -Pq '^(?=.*heic)(?=.*jng)(?=.*png)(?=.*jp2)(?=.*web
        sudo ln -s /usr/local/lib/lib*.so /lib64
        sudo /sbin/ldconfig /lib64
        sudo /sbin/ldconfig -v
+
+       echo "Installing Support Tools"
+       sudo yum -y makecache
+       sudo yum -y install libtool
+       sudo yum -y install gcc-c++
+       sudo yum -y groupinstall "Development Tools"
+       sudo yum -y install jbigkit.$ARCHITECTURE jbigkit-devel.$ARCHITECTURE
+       sudo yum -y install openjpeg2 openjpeg2-devel
        
        ARCHITECTURE=$(uname -m)
        
