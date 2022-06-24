@@ -1,6 +1,6 @@
 echo Setup OSSEC
 OSSEC_FILE=/var/ossec/bin/ossec-control
-if [ ! -f "$OSSEC_FILE" ]; then
+if ! [ -f "$OSSEC_FILE" ]; then
 	EB_APP_USER=$(sudo /opt/elasticbeanstalk/bin/get-config platformconfig -k AppUser)
 	WORKSPACE=/home/$EB_APP_USER
 	WORKSPACE_OSSEC=${WORKSPACE}/ossec

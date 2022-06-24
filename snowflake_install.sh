@@ -26,4 +26,6 @@ if ! yum list installed | grep 'snowflake-odbc'; then
 	# 6 or LOG_TRACE: log all method entry points
 	# sudo bash -c 'echo "tracing     = 6" >> /etc/odbc.ini' # --> Will Turn on ALL LOGS
 	sudo bash -c 'echo "tracing     = 0" >> /etc/odbc.ini'
+else
+	echo "Snowflake already installed"
 fi
