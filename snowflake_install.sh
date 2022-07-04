@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if ! yum list installed | grep 'snowflake-odbc'; then
 	ARCHITECTURE=$(uname -m)
-	sudo cp snowflake.repo.$ARCHITECTURE /etc/yum.repos.d/.
+	sudo cp snowflake.repo.$ARCHITECTURE /etc/yum.repos.d/snowflake.repo
 	sudo yum -y install unixODBC.$ARCHITECTURE
 	sudo yum -y install unixODBC-devel.$ARCHITECTURE
 	sudo yum -y install snowflake-odbc
